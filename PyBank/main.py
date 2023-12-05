@@ -57,6 +57,7 @@ print(changes_in_profit_losses_over_the_entire_period)
 print()
 
 average_of_changes = changes_in_profit_losses_over_the_entire_period.mean()
+average_of_changes_rounded = round(average_of_changes, 2)
 greatest_increase_in_profits = changes_in_profit_losses_over_the_entire_period.max()
 greatest_decrease_in_profits = changes_in_profit_losses_over_the_entire_period.min()
 
@@ -86,11 +87,32 @@ print()
 
 greatest_increase_in_profits_month = budget_data_df.loc[greatest_increase_in_profits_index.tolist()[0]]['Date']
 greatest_decrease_in_profits_month = budget_data_df.loc[greatest_decrease_in_profits_index.tolist()[0]]['Date']
+
+greatest_increase_in_profits_string = 'Greatest Increase in Profits: {} ({})'.format(greatest_increase_in_profits_month, greatest_increase_in_profits)
+greatest_decrease_in_profits_string = 'Greatest Decrease in Profits: {} ({})'.format(greatest_decrease_in_profits_month, greatest_decrease_in_profits)
+
 # Results as mandated by module 3:
 print('Financial Analysis')
 print('----------------------------')
 print('Total Months:', budget_data_df.shape[0])
 print('Total:', net_total_amount_profit_losses)
 print('Average Change: $%.2f' % average_of_changes)
+#print('Average Change:', average_of_changes_rounded)
 print('Greatest Increase in Profits: {} ({})'.format(greatest_increase_in_profits_month, greatest_increase_in_profits))
 print('Greatest Decrease in Profits: {} ({})'.format(greatest_decrease_in_profits_month, greatest_decrease_in_profits))
+
+analysis_results_output = 'Total Months:' + str(budget_data_df.shape[0]) + '\n' \
+          + 'Total:' + str(net_total_amount_profit_losses) + '\n' \
+          + 'Average Change:' + str(average_of_changes_rounded) + '\n' \
+          + str(greatest_increase_in_profits_string) + '\n' \
+          + str(greatest_decrease_in_profits_string)
+
+the_output_filepath = os.path.join(os.path.dirname(__file__) + '\\analysis\\', 'analysis_results.txt')
+print('the_output_filepath')
+print(the_output_filepath)
+print()
+
+# Per instruction from professor, write results to text file:
+with open(the_output_filepath, 'w') as f:
+    f.write(analysis_results_output)
+    f.close()
