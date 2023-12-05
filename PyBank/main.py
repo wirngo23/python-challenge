@@ -47,7 +47,20 @@ print('Dataset dimensions of Budget Data financial records of my company:')
 print(budget_data_df.shape)
 print()
 
+net_total_amount_profit_losses = budget_data_df['Profit/Losses'].sum()
+
+# Calculating the difference between two rows
+changes_in_profit_losses_over_the_entire_period = budget_data_df['Profit/Losses'].diff()
+
+print('changes_in_profit_losses_over_the_entire_period')
+print(changes_in_profit_losses_over_the_entire_period)
+print()
+
+average_of_changes = changes_in_profit_losses_over_the_entire_period.mean()
+
 # Results as mandated by module 3:
 print('Financial Analysis')
 print('----------------------------')
 print('Total Months:', budget_data_df.shape[0])
+print('Total:', net_total_amount_profit_losses)
+print('Average Change: $%.2f' % average_of_changes)
